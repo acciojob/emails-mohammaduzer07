@@ -36,7 +36,7 @@ public class Gmail extends Email {
             Address a = inbox.get(i);
             if(inbox.contains(a.message)){
                 trash.add(a);
-                inbox.remove(a);
+                inbox.remove(i);
                 return;
             }
         }
