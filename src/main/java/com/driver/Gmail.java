@@ -1,7 +1,7 @@
 package com.driver;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
+//import java.util.Date;
 
 public class Gmail extends Email {
 
@@ -13,8 +13,8 @@ public class Gmail extends Email {
     public Gmail(String emailId, int inboxCapacity) {
         super(emailId);
         this.inboxCapacity = inboxCapacity;
-        this.inbox = new ArrayList<>();
-        this.trash = new ArrayList<>();
+        inbox = new ArrayList<>();
+        trash = new ArrayList<>();
     }
 
     public void receiveMail(Date date, String sender, String message){
@@ -22,7 +22,7 @@ public class Gmail extends Email {
         // It is guaranteed that:
         // 1. Each mail in the inbox is distinct.
         // 2. The mails are received in non-decreasing order. This means that the date of a new mail is greater than equal to the dates of mails received already.
-        if(inbox.size() >= inboxCapacity){
+        if(inbox.size() >= getInboxCapacity()){
             trash.add(inbox.get(0));
             inbox.remove(0);
         }
@@ -34,7 +34,7 @@ public class Gmail extends Email {
         // If the given message is found in any mail in the inbox, move the mail to trash, else do nothing
         for(int i=0; i<inbox.size(); i++){
             Address a = inbox.get(i);
-            if(inbox.contains(a.message)){
+            if(a.message.equals(message)){
                 trash.add(a);
                 inbox.remove(i);
                 return;
